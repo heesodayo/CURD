@@ -15,12 +15,23 @@ function App() {
     localStorage.setItem('todos', JSON.stringify(newTodos));
   };
 
+  const deleteTodo = (todoToDelete) => {
+    const updatedTodos = todos.filter((todo) => todo !== todoToDelete);
+    updateTodos(updatedTodos);
+  };
+
+  const toggleTodo = (id) => {
+    const updatedTodos = todos.map((todo) =>
+    todo.id === id ? {...todo, isDone: !todo.isDone} : todo);
+    updateTodos(updatedTodos);
+  };
+  
   return (
     <>
       <Hello />
       <InputTodo todos={todos} updateTodos={updateTodos} />
       <div>
-      <TodoList todos={todos} updateTodos={updateTodos} />
+      <TodoList todos={todos} updateTodos={updateTodos} deleteTodo={deleteTodo} toggleTodo={toggleTodo}/>
       </div>
     </>
   );

@@ -1,4 +1,40 @@
 import { useState} from "react";
+import styled from 'styled-components';
+const StyledInput = styled.input`
+    display: flex;
+    width: 480px;
+    // height: 42px;
+    padding: 10px 16px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    border: 1px solid #E5E2E3;
+    background: #FEFEFE;
+`;
+const StyledButton = styled.button`
+    display: flex;
+    padding: 10px 16px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    background: #9FFF79;
+    color: #000;
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+`;
+const StyledDiv = styled.div`
+    display: flex;
+    padding: 10px 0px 40px 0px ;
+    align-items: center;
+    gap: 24px;
+`;
+
+
+
 export default function InputTodo ({todos, updateTodos}) {
     const [text, setText] = useState('')
     const handleAddTodo = () => {
@@ -14,15 +50,14 @@ export default function InputTodo ({todos, updateTodos}) {
     };
 
     return (
-        <>
-            <input 
+        <StyledDiv>
+            <StyledInput 
             type="text" 
             value={text}
             onChange={(e)=> setText(e.target.value)}
             placeholder="할일을 입력하세요">
-    
-            </input>
-            <button onClick={handleAddTodo}> 추가하기 </button>
-        </>
+            </StyledInput>
+            <StyledButton onClick={handleAddTodo}> 추가하기 </StyledButton>
+        </StyledDiv>
     );
 }
