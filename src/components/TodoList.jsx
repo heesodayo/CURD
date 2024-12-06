@@ -1,7 +1,7 @@
 import TodoItem from "./TodoItem";
 import styles from "./css/TodoList.module.css"
 
-export default function TodoList ({todos, deleteTodo, toggleTodo}) {
+export default function TodoList ({ todos, deleteTodo, toggleTodo, editTodo }) {
     return (
         <>
         {/* <h3> 오늘의 할 일 </h3> */}
@@ -23,6 +23,7 @@ export default function TodoList ({todos, deleteTodo, toggleTodo}) {
             todo={todo}
             deleteTodo={deleteTodo}
             toggleTodo={toggleTodo}
+            editTodo={editTodo}
             />
         ))}
         </>

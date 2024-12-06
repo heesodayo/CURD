@@ -26,12 +26,18 @@ function App() {
     updateTodos(updatedTodos);
   };
   
+  const editTodo = (id, newText) => {
+    setTodos(
+      todos.map((todo) => todo.id === id ? {...todo, text: newText} : todo)
+    );
+  };
+
   return (
     <>
       <Hello />
       <InputTodo todos={todos} updateTodos={updateTodos} />
       <div>
-      <TodoList todos={todos} updateTodos={updateTodos} deleteTodo={deleteTodo} toggleTodo={toggleTodo}/>
+      <TodoList todos={todos} updateTodos={updateTodos} deleteTodo={deleteTodo} toggleTodo={toggleTodo} editTodo={editTodo}/>
       </div>
     </>
   );

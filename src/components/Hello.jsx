@@ -10,7 +10,7 @@ const StyledH1 = styled.h1`
 
 function Hello () {
     return (
-        <StyledH1> 오늘의 할 일 </StyledH1>
+        <StyledH1> 오늘의 할 일은 무엇일까요? </StyledH1>
     );
 }
 
