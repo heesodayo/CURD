@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styles from "./css/TodoItem.module.css"
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
+import { Table } from 'react-bootstrap';
 
 const StyledDeleteButton = styled.button`
 display: flex;
@@ -77,14 +79,54 @@ export default function TodoItem ({todo, deleteTodo, toggleTodo, editTodo}) {
         if (newText.trim()) {
             editTodo(todo.id, newText);
             setIsEditing(false);
+            toast.success('할 일이 수정되었습니다!');
         }
     };
+
+    const handleDelete = () => {
+        // 삭제 확인
+        const isConfirmed = window.confirm("정말 삭제하시겠습니까?");
+        if (!isConfirmed) return; // 취소 시 함수 종료
+    
+        // 임시로 삭제된 상태 저장
+        const deletedTodo = todo;
+    
+        // 토스트 메시지 표시
+        const toastId = toast(
+        <div>
+            <span>할 일이 삭제되었습니다.</span>
+            <button
+            style={{
+                marginLeft: "10px",
+                padding: "5px 10px",
+                background: "#f0f0f0",
+                border: "none",
+                cursor: "pointer",
+                borderRadius: "4px",
+            }}
+            onClick={() => {
+                toast.dismiss(toastId); // 토스트 메시지 닫기
+                updateTodos((prevTodos) => [...prevTodos, deletedTodo]); // 삭제 취소
+            }}
+            >
+            취소
+            </button>
+        </div>,
+          { autoClose: 5000 } // 5초 동안 표시
+        );
+    
+        // 실제 삭제 로직
+        deleteTodo(todo.id);
+      };
+    
+
+    
 
     return (
         <>
         {isEditing ? (
             <>
-            <table>
+            <Table>
             <tbody>
                 <tr>
                     <td className={styles.complete}><input 
@@ -96,7 +138,7 @@ export default function TodoItem ({todo, deleteTodo, toggleTodo, editTodo}) {
                     <td className={styles.delete}><StyledDiv><StyledSaveButton onClick={handleSave}> 저장 </StyledSaveButton> <StyledCancleButton onClick={() => setIsEditing(false)}> 취소 </StyledCancleButton></StyledDiv></td>
                     </tr>
                 </tbody>
-                </table>
+                </Table>
             </>
             ) : (
                 <>
@@ -114,7 +156,7 @@ export default function TodoItem ({todo, deleteTodo, toggleTodo, editTodo}) {
                         <td className={styles.delete}>
                             <StyledDiv>
                             <StyledEditButton onClick={()=> setIsEditing(true)}> 수정 </StyledEditButton>
-                            <StyledDeleteButton onClick={() => deleteTodo(todo)}> 삭제 </StyledDeleteButton>
+                            <StyledDeleteButton onClick={handleDelete}> 삭제 </StyledDeleteButton>
                             </StyledDiv>
                         </td>
                     </tr>

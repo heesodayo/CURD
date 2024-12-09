@@ -1,11 +1,12 @@
 import TodoItem from "./TodoItem";
 import styles from "./css/TodoList.module.css"
+import { Table } from 'react-bootstrap';
 
 export default function TodoList ({ todos, deleteTodo, toggleTodo, editTodo }) {
     return (
         <>
         {/* <h3> 오늘의 할 일 </h3> */}
-            <table className={styles.tableHeader
+            <Table className={styles.tableHeader
             }>
                 <thead>
                     <tr>
@@ -16,7 +17,7 @@ export default function TodoList ({ todos, deleteTodo, toggleTodo, editTodo }) {
                         <td className={styles.delete}> Delete </td>
                     </tr>
                 </thead>
-            </table>
+            </Table>
         {todos.map((todo) => (
             <TodoItem
             key={todo.id}

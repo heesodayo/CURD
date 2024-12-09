@@ -1,5 +1,7 @@
 import { useState} from "react";
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
+
 const StyledInput = styled.input`
     display: flex;
     width: 480px;
@@ -47,6 +49,7 @@ export default function InputTodo ({todos, updateTodos}) {
         };
         updateTodos([...todos, newTodo]);
         setText('');
+        toast.success('할 일이 추가되었습니다!');
     };
 
     return (
